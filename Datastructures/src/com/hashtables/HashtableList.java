@@ -1,5 +1,6 @@
 package com.hashtables;
 // This class is the individual list that buckets will refer to , store objects in this list when a collision occurs
+// This code can also be used for implementation of linked list
 
 public class HashtableList {
 	
