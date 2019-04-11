@@ -1,6 +1,6 @@
 package com.hashtables;
 // This class is the individual list that buckets will refer to , store objects in this list when a collision occurs
-// This code can also be used for implementation of linked list
+// This code can also be used for implementation of Linked List
 
 public class HashtableList {
 	
@@ -22,13 +22,14 @@ public class HashtableList {
 	
 	
 	public boolean add(HashtableNode node) {
-		// Traversing to the last element
+
 		if(node==null)
 			return false;
 		
 		HashtableNode currentRef=headPointer ;
+		// Traversing to the last element		
+		while(currentRef.getNext()!=null) {
 		
-		while(currentRef!=null) {
 			currentRef = currentRef.getNext();
 		}
 		
@@ -43,10 +44,13 @@ public class HashtableList {
 	
 	
 	public int getSize() {
-		int count = 0;
+		int count = 1;
 		HashtableNode currentRef=headPointer ;
 		
-		while(currentRef!=null) {
+		if(currentRef==null)
+			return 0;
+		
+		while(currentRef.getNext()!=null) {
 			currentRef = currentRef.getNext();
 			count++;
 		}
@@ -59,11 +63,20 @@ public class HashtableList {
 		int count = 0;
 		HashtableNode currentRef=headPointer ;
 		
-		while(currentRef!=null) {
+		if(index==0) {
+			return currentRef;
+		}
+		
+		
+		while(currentRef.getNext()!=null) {
+			
 			currentRef = currentRef.getNext();
 			count++;
-			if(count == index)
+			if(count == index) {
 			return 	currentRef;
+			}
+			
+			
 		
 		}
 		return null;
@@ -79,7 +92,7 @@ public class HashtableList {
 			return currentRef;
 		}
 		
-		while(currentRef!=null) {
+		while(currentRef.getNext()!=null) {
 			currentRef = currentRef.getNext();
 			if(currentRef.getKey().equals(key)) {
 				return currentRef;
