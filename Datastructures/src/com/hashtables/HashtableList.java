@@ -53,6 +53,44 @@ public class HashtableList {
 		
 	}	
 	
+	public HashtableNode getNodeFromIndex(int index) {
+		
+		int count = 0;
+		HashtableNode currentRef=headPointer ;
+		
+		while(currentRef!=null) {
+			currentRef = currentRef.getNext();
+			count++;
+			if(count == index)
+			return 	currentRef;
+		
+		}
+		return null;
+	}
+	
+	
+	public HashtableNode getNodeFromKey(String key) {
+		
+		
+	HashtableNode currentRef=headPointer ;
+	
+		if(currentRef.getKey().equals(key)) {
+			return currentRef;
+		}
+		
+		while(currentRef!=null) {
+			currentRef = currentRef.getNext();
+			if(currentRef.getKey().equals(key)) {
+				return currentRef;
+			}
+		
+		}
+		
+		return null;
+		
+		
+	}
+	
 	
 	
 	
