@@ -42,12 +42,14 @@ public class HashtableList {
 	
 	
 	public int getSize() {
+		int count = 0;
 		HashtableNode currentRef=headPointer ;
 		
 		while(currentRef!=null) {
 			currentRef = currentRef.getNext();
+			count++;
 		}
-		return 0;
+		return count;
 		
 	}	
 	
