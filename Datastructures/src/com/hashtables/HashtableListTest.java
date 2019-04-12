@@ -23,7 +23,7 @@ public class HashtableListTest {
 		int size = testLinkedList.getSize();
 		
 		for(int i=0;i<size;i++) {
-			HashtableNode currentNode = testLinkedList.getNodeFromIndex(i);
+			HashtableNode currentNode = testLinkedList.getNode(i);
 			System.out.println("Node"+i+" {"+"key ="+currentNode.getKey() +" Value="+currentNode.getValue()+"}");
 			
 		}
