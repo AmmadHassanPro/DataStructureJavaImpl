@@ -58,7 +58,7 @@ public class HashtableList {
 		
 	}	
 	
-	public HashtableNode getNodeFromIndex(int index) {
+	public HashtableNode getNode(int index) {
 		
 		int count = 0;
 		HashtableNode currentRef=headPointer ;
@@ -83,7 +83,7 @@ public class HashtableList {
 	}
 	
 	
-	public HashtableNode getNodeFromKey(String key) {
+	public HashtableNode getNode(String key) {
 		
 		
 	HashtableNode currentRef=headPointer ;
