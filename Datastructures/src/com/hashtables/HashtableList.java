@@ -149,8 +149,9 @@ public class HashtableList {
 			return true;
 		}
 		
-		try {
+	
 		//Iterating towards the node in the list
+		try{
 		while(!(currentRef.getNext().getKey().equals(nodeToRemove.getKey()))) {
 			currentRef = currentRef.getNext();
 		}
@@ -161,27 +162,103 @@ public class HashtableList {
 		currentRef.setNext(nextRefFromRemovedNode);
 		nodeFound = true;
 		}
+		
 		catch(NullPointerException ex) {
 			return (nodeFound = false);
 			
 		}
 		
 		
-		
-		
 		return nodeFound;
 	}
 	
+	public boolean replace(HashtableNode currentNode , HashtableNode newNode) {
+		
+		HashtableNode currentRef = headPointer ;
+		HashtableNode nextRefFromReplaceNode = null;
+		
+		if(currentNode.getKey().equals(currentRef.getKey())) {
+			newNode.setNext(headPointer.getNext());
+			headPointer=newNode;
+			return true;
+		}
+		
+		
+		try {
+		//Traversing to the next 
+		while(!(currentRef.getNext().getKey().equals(currentNode.getKey()))) {
+			currentRef= currentRef.getNext();
+		}
+		
+		nextRefFromReplaceNode = currentRef.getNext().getNext();
+		}
+		catch(NullPointerException ex) {
+			currentRef.setNext(newNode);
+			newNode.setNext(null);
+			return true;
+			
+		}
+		finally {
+			currentRef.setNext(newNode);
+			newNode.setNext(nextRefFromReplaceNode);
+			
+			
+		}
+		
+		
+		return false;
+		
+		
+		
+	}
+	
+public boolean replace(int index , HashtableNode newNode) {
+		
+		if(index>=this.getSize()) {
+			return false;
+		}
+		if(index==0) {
+			newNode.setNext(headPointer.getNext());
+			headPointer=newNode;
+			return true;
+		}		
+		
+		HashtableNode currentRef = headPointer ;
+		HashtableNode nextRefFromReplaceNode = null;
+		int count=0;
+		
+		try {
+		//Traversing to the next 
+		while(currentRef.getNext()!=null) {
+			
+			currentRef= currentRef.getNext();
+			count++;
+			if(count==(index-1)) {
+				break;
+			}
+		}
+		
+		nextRefFromReplaceNode = currentRef.getNext().getNext();
+		}
+		catch(NullPointerException ex) {
+			currentRef.setNext(newNode);
+			newNode.setNext(null);
+			return true;
+			
+		}
+		finally{
+			
+			currentRef.setNext(newNode);
+			newNode.setNext(nextRefFromReplaceNode);
+		}
+		
+		return false;
+		
+		
+		
+	}
 	
 	
+		
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
