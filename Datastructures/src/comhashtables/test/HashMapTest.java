@@ -1,4 +1,7 @@
-package com.hashtables;
+package comhashtables.test;
+
+import com.hashtables.HashMap;
+import com.hashtables.HashtableNode;
 
 public class HashMapTest {
 	
