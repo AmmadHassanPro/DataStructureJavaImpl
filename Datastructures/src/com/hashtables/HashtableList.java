@@ -105,6 +105,75 @@ public class HashtableList {
 		
 	}
 	
+	public boolean remove(int index) {
+		
+		HashtableNode currentRef=headPointer ;
+		if(index==0) {
+			headPointer = currentRef.getNext();
+			return true;
+		}
+		
+		if(index>=this.getSize()) {
+			return false;
+		}
+		
+		int count=0;
+		//iterating to the required index
+		while(currentRef.getNext()!=null) {
+			currentRef = currentRef.getNext();
+			count++;
+			if(count== (index-1)) {
+				break;
+				
+			}
+		}
+		
+		HashtableNode nodetoDelete = currentRef.getNext();
+		currentRef.setNext(nodetoDelete.getNext());
+		return true;
+		
+	}
+	
+	public boolean remove(HashtableNode nodeToRemove) {
+
+		HashtableNode currentRef = headPointer;
+		boolean nodeFound = false;
+		
+		if(nodeToRemove == currentRef) {
+			if(currentRef.getNext()!=null) {
+				headPointer =currentRef.getNext();
+				return true;
+				
+			}
+			headPointer = null;
+			return true;
+		}
+		
+		try {
+		//Iterating towards the node in the list
+		while(!(currentRef.getNext().getKey().equals(nodeToRemove.getKey()))) {
+			currentRef = currentRef.getNext();
+		}
+		
+		
+		HashtableNode nextRefFromRemovedNode = currentRef.getNext().getNext();
+		//Setting Current Ref to skip the removed node
+		currentRef.setNext(nextRefFromRemovedNode);
+		nodeFound = true;
+		}
+		catch(NullPointerException ex) {
+			return (nodeFound = false);
+			
+		}
+		
+		
+		
+		
+		return nodeFound;
+	}
+	
+	
+	
 	
 	
 	
