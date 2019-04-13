@@ -29,6 +29,28 @@ public class HashtableListTest {
 		}
 		
 		
+		System.out.println("Removing 5th Node by passing the integer");
+		testLinkedList.remove(4); // Sized
+		size = testLinkedList.getSize();
+		for(int i=0;i<size;i++) {
+			HashtableNode currentNode = testLinkedList.getNode(i);
+			System.out.println("Node"+i+" {"+"key ="+currentNode.getKey() +" Value="+currentNode.getValue()+"}");
+			
+		}
+		
+		
+		System.out.println("Removing 2nd Node by passing a new node with the same exact data");
+		testLinkedList.remove(new HashtableNode("two",2)); // Sized
+		size = testLinkedList.getSize();
+		for(int i=0;i<size;i++) {
+			HashtableNode currentNode = testLinkedList.getNode(i);
+			System.out.println("Node"+i+" {"+"key ="+currentNode.getKey() +" Value="+currentNode.getValue()+"}");
+			
+		}
+		
+		
+		
+		
 		
 		
 		
