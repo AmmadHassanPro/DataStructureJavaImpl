@@ -24,7 +24,7 @@ public class HashtableNode {
 	public void setValue(int value) {
 		this.value = value;
 	}
-	HashtableNode(String k, int v){
+	public HashtableNode(String k, int v){
 		
 		this.next=null;
 		key = k;
