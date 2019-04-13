@@ -30,7 +30,7 @@ public class HashtableListTest {
 		
 		
 		System.out.println("Removing 5th Node by passing the integer");
-		testLinkedList.remove(4); // Sized
+		testLinkedList.remove(4);
 		size = testLinkedList.getSize();
 		for(int i=0;i<size;i++) {
 			HashtableNode currentNode = testLinkedList.getNode(i);
@@ -48,6 +48,24 @@ public class HashtableListTest {
 			
 		}
 		
+		System.out.println("Replacing 3rd Node by passing a new node with different Data");
+		testLinkedList.replace(2, new HashtableNode("six",6));
+		size = testLinkedList.getSize();
+		for(int i=0;i<size;i++) {
+			HashtableNode currentNode = testLinkedList.getNode(i);
+			System.out.println("Node"+i+" {"+"key ="+currentNode.getKey() +" Value="+currentNode.getValue()+"}");
+			
+		}
+		
+		System.out.println("Replacing 3rd Node by passing a new node with different Data");
+		testLinkedList.replace(new HashtableNode("six",6), new HashtableNode("seven",7));
+		size = testLinkedList.getSize();
+		for(int i=0;i<size;i++) {
+			HashtableNode currentNode = testLinkedList.getNode(i);
+			System.out.println("Node"+i+" {"+"key ="+currentNode.getKey() +" Value="+currentNode.getValue()+"}");
+			
+		}
+	
 		
 		
 		
