@@ -29,6 +29,19 @@ public class HashtableListTest {
 		}
 		
 		
+		System.out.println("Getting 2nd node");
+		
+		HashtableNode searchNode = testLinkedList.getNode("two");
+		if(searchNode!=null) {
+			System.out.println("Node Key:" + searchNode.getKey()+" Node Value" +searchNode.getValue() );
+		}
+		else {
+			System.out.println("Node could not be found");
+			
+		}
+		
+		
+		
 		System.out.println("Removing 5th Node by passing the integer");
 		testLinkedList.remove(4);
 		size = testLinkedList.getSize();
@@ -67,7 +80,7 @@ public class HashtableListTest {
 		}
 	
 		
-		
+	
 		
 		
 		
