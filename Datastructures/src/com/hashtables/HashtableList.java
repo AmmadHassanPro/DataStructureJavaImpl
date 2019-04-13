@@ -20,11 +20,19 @@ public class HashtableList {
 		headPointer = head;
 	}
 	
+	public HashtableList(){
+			
+			
+		}
 	
 	public boolean add(HashtableNode node) {
 
 		if(node==null)
 			return false;
+		if(headPointer==null) {
+			headPointer =node;
+			return true;
+		}
 		
 		HashtableNode currentRef=headPointer ;
 		// Traversing to the last element		
@@ -257,6 +265,9 @@ public boolean replace(int index , HashtableNode newNode) {
 		
 		
 	}
+
+
+
 	
 	
 		
