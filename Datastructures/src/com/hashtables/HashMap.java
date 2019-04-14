@@ -192,8 +192,8 @@ public class HashMap {
 			
 			
 			HashtableList tempList= oldArray[oldIndexStoredList.get(i)];
-			
-			for(int n=0;n<tempList.getSize();n++) {
+			int temListSize = tempList.getSize(); //as size will dynalically change when transferring , so keeping the size before hand
+			for(int n=0;n<temListSize;n++) {
 				
 				HashtableNode tempNode = tempList.getNode(n);
 				int newHashedIndex = this.getHash(tempNode.getKey(),newArraySize);
