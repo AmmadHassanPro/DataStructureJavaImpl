@@ -95,6 +95,9 @@ public class HashtableList {
 		
 		
 	HashtableNode currentRef=headPointer ;
+		if(currentRef==null) {
+			return null;
+		}
 	
 		if(currentRef.getKey().equals(key)) {
 			return currentRef;
@@ -116,6 +119,9 @@ public class HashtableList {
 	public boolean remove(int index) {
 		
 		HashtableNode currentRef=headPointer ;
+		if(currentRef==null) {
+			return false;
+		}
 		if(index==0) {
 			headPointer = currentRef.getNext();
 			return true;
@@ -145,6 +151,9 @@ public class HashtableList {
 	public boolean remove(HashtableNode nodeToRemove) {
 
 		HashtableNode currentRef = headPointer;
+		if(currentRef==null) {
+			return false;
+		}
 		boolean nodeFound = false;
 		
 		if(nodeToRemove == currentRef) {
@@ -183,6 +192,9 @@ public class HashtableList {
 	public boolean replace(HashtableNode currentNode , HashtableNode newNode) {
 		
 		HashtableNode currentRef = headPointer ;
+		if(currentRef==null) {
+			return false;
+		}
 		HashtableNode nextRefFromReplaceNode = null;
 		
 		if(currentNode.getKey().equals(currentRef.getKey())) {
