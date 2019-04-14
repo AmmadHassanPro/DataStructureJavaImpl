@@ -202,12 +202,12 @@ public class HashMap {
 				
 			}
 			
-			this.bucketArray = newArray;
-			this.indexStoredList = newIndexStoredList;
+			
 			
 		}
 		
-		
+		this.bucketArray = newArray;
+		this.indexStoredList = newIndexStoredList;
 		
 	}
 	
