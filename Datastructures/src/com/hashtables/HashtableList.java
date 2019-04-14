@@ -266,6 +266,16 @@ public boolean replace(int index , HashtableNode newNode) {
 		
 	}
 
+	public boolean containsKey(String key) {
+		HashtableNode result = this.getNode(key);
+		if(result!=null) {
+			return true;
+			
+		}
+		return false;
+		
+	}
+	
 
 
 	
