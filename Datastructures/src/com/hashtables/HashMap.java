@@ -4,13 +4,12 @@ public class HashMap {
 	
 	private HashtableList[] bucketArray;
 	private int hashArraySize;
+	private int size; // Number of actual elements present
+	private float loadfactor=0.75f;
 	
-	public int getHashArraySize() {
-		
-		return hashArraySize;
-	}
-	
-	public HashMap(int arraySize) {
+	public HashMap() {
+		this.size=0;
+		int arraySize =16;
 		this.hashArraySize = arraySize;
 		bucketArray = new HashtableList[arraySize];
 		
@@ -18,6 +17,39 @@ public class HashMap {
 			bucketArray[i]= new HashtableList();
 			
 		}
+		
+		loadfactor=0.75f;
+	}
+	
+	private int getHashArraySize() {
+		
+		return hashArraySize;
+	}
+	
+	public HashMap(int arraySize) {
+		this.size=0;
+		this.hashArraySize = arraySize;
+		bucketArray = new HashtableList[arraySize];
+		
+		for (int i=0;i<arraySize;i++) {
+			bucketArray[i]= new HashtableList();
+			
+		}
+		loadfactor=0.75f;
+		
+	}
+	
+	
+	public HashMap(int arraySize ,float lf) {
+		this.size=0;
+		this.hashArraySize = arraySize;
+		bucketArray = new HashtableList[arraySize];
+		
+		for (int i=0;i<arraySize;i++) {
+			bucketArray[i]= new HashtableList();
+			
+		}
+		loadfactor=lf;
 		
 	}
 	
@@ -30,10 +62,12 @@ public class HashMap {
 		// If node not present already, then add it to the list
 		if(result==null) {
 			bucketArray[hashedIndex].add(new HashtableNode(key,value));
+			size++;
 			return true;
 		}
 		//if node is present , just update the value		
 		result.setValue(value);
+		size++;
 		return true;
 	
 		
@@ -46,7 +80,7 @@ public class HashMap {
 		String key = nodeTobeAdded.getKey();
 		int value = nodeTobeAdded.getValue();
 		int hashedIndex = this.getHash(key);
-	
+		size++;
 		
 		return true;
 	
@@ -65,6 +99,10 @@ public class HashMap {
 		int code =  key.hashCode() < 0 ? (key.hashCode()*(-1)) :key.hashCode() ; // making it unsigned
 		
 		return code % this.getHashArraySize();
+	}
+	
+	public int size() {
+		return this.size;
 	}
 	
 	
