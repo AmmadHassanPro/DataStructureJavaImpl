@@ -25,7 +25,15 @@ public class HashMap {
 		
 		//caculating the hash
 		int hashedIndex =  this.getHash(key);
-		bucketArray[hashedIndex].add(new HashtableNode(key,value));
+		//Check if the node is already present
+		HashtableNode result = bucketArray[hashedIndex].containsKey(key);
+		// If node not present already, then add it to the list
+		if(result==null) {
+			bucketArray[hashedIndex].add(new HashtableNode(key,value));
+			return true;
+		}
+		//if node is present , just update the value		
+		result.setValue(value);
 		return true;
 	
 		
@@ -38,7 +46,8 @@ public class HashMap {
 		String key = nodeTobeAdded.getKey();
 		int value = nodeTobeAdded.getValue();
 		int hashedIndex = this.getHash(key);
-		bucketArray[hashedIndex].add(new HashtableNode(key,value));
+	
+		
 		return true;
 	
 		
