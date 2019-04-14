@@ -169,8 +169,8 @@ public class HashMap {
 	
 	private float calculateLoadFactor() {
 		
-		int difference = this.hashArraySize - this.size;
-		return (difference/this.hashArraySize);
+		
+		return ((float)this.size/this.hashArraySize);
 		
 	}
 	
