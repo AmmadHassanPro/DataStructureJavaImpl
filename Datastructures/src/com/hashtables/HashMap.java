@@ -144,13 +144,14 @@ public class HashMap {
 	//This method will reduce size and adjust the load by downsizing the array
 	private void reduceSize() {
 		size--;
-		
+		/*
 		float currentLoad = calculateLoadFactor();
 		
 		if (currentLoad < (this.loadfactor / 2) ) {
 			
 			this.resize(0.5f);
 		}
+		*/
 		
 	}
 	
