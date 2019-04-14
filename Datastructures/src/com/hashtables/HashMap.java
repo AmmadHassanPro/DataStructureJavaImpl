@@ -136,7 +136,13 @@ public class HashMap {
 		}
 		//Otherwise
 		this.bucketArray[hashedIndex].remove(result);
-		indexStoredList.remove(hashedIndex);
+		// Since the remove method of ArrayList expects the object to be removed, 
+		//if passed integer , it will take it as index and try to remove the value on that index,
+		// that is why creater an interger object and passing it, which will be converted automatically when it will reach the method body
+		//this was done just to call that overloaded method
+		Integer removeIntObject = new Integer(hashedIndex);
+		indexStoredList.remove(removeIntObject);
+		
 		reduceSize();
 		return true;		
 	}
@@ -144,14 +150,14 @@ public class HashMap {
 	//This method will reduce size and adjust the load by downsizing the array
 	private void reduceSize() {
 		size--;
-		/*
+		
 		float currentLoad = calculateLoadFactor();
 		
 		if (currentLoad < (this.loadfactor / 2) ) {
 			
 			this.resize(0.5f);
 		}
-		*/
+		
 		
 	}
 	
@@ -206,7 +212,12 @@ public class HashMap {
 			int temListSize = tempList.getSize(); //as size will dynamically change when transferring , so keeping the size before hand
 			for(int n=0;n<temListSize;n++) {
 				
-				HashtableNode tempNode = tempList.getNode(n);
+				HashtableNode tempNode = tempList.getNode(0);
+				// Removing the node from the current Linked List , so that it cannot be reference from the old list
+				tempList.remove(tempNode);
+				//Setting it null, so that it accidently does not refer anything from the old Linked List
+				tempNode.setNext(null);
+				
 				int newHashedIndex = this.getHash(tempNode.getKey(),newArraySize);
 				newArray[newHashedIndex].add(tempNode);
 				newIndexStoredList.add(newHashedIndex);
