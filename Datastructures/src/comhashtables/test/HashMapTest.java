@@ -9,7 +9,6 @@ public class HashMapTest {
 		
 		HashMap testHashMap = new HashMap(10);
 		
-		
 		testHashMap.put("one",1);
 		testHashMap.put("two",2);
 		testHashMap.put("three",3);
@@ -24,8 +23,12 @@ public class HashMapTest {
 		System.out.println("Node Key:"+result.getKey()+" Value:"+result.getValue());
 		
 		
-		
-		
+		testHashMap.remove("one");
+		result = testHashMap.get("one");
+		if(result==null) {
+			System.out.println("Since node with key:one was removed, so we got null");
+			
+		}
 		
 	}
 
