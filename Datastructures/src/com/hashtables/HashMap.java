@@ -146,6 +146,13 @@ public class HashMap {
 	private void reduceSize() {
 		size--;
 		
+		float currentLoad = calculateLoadFactor();
+		
+		if (currentLoad < (this.loadfactor / 2) ) {
+			
+			this.resize(0.5f);
+		}
+		
 	}
 	
 	private void increaseSize() {
@@ -154,10 +161,10 @@ public class HashMap {
 		float currentLoad = calculateLoadFactor();
 		if (currentLoad > this.loadfactor) {
 			
-			// if its greater than resize
+			// if its greater than resize , double it
+			this.resize(2);
 			
 		}
-		
 		
 	}
 	
