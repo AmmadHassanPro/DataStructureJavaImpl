@@ -187,12 +187,22 @@ public class HashMap {
 		
 		HashtableList[] oldArray = this.bucketArray;
 		ArrayList<Integer> oldIndexStoredList = this.indexStoredList;
+		// Since the index list can contain duplicate indexes we need to keep track of what indexes we have already checked
+		ArrayList<Integer> alreadyCheckedIndex = new ArrayList<>();
+		
 		ArrayList<Integer> newIndexStoredList= new ArrayList<>(); 
 		for(int i=0;i<oldIndexStoredList.size();i++) {
+			int index = oldIndexStoredList.get(i);
+			
+			if(alreadyCheckedIndex.contains(index)) {
+				continue;
+			}
 			
 			
-			HashtableList tempList= oldArray[oldIndexStoredList.get(i)];
-			int temListSize = tempList.getSize(); //as size will dynalically change when transferring , so keeping the size before hand
+			
+			
+			HashtableList tempList= oldArray[index];
+			int temListSize = tempList.getSize(); //as size will dynamically change when transferring , so keeping the size before hand
 			for(int n=0;n<temListSize;n++) {
 				
 				HashtableNode tempNode = tempList.getNode(n);
@@ -202,12 +212,15 @@ public class HashMap {
 				
 			}
 			
+			alreadyCheckedIndex.add(index);
+			
 			
 			
 		}
 		
 		this.bucketArray = newArray;
 		this.indexStoredList = newIndexStoredList;
+		this.hashArraySize = this.bucketArray.length;
 		
 	}
 	
