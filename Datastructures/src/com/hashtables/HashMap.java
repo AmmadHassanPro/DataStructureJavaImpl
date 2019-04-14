@@ -1,11 +1,14 @@
 package com.hashtables;
 
+import java.util.ArrayList;
+
 public class HashMap {
 	
 	private HashtableList[] bucketArray;
 	private int hashArraySize;
 	private int size; // Number of actual elements present
 	private float loadfactor=0.75f;
+	private ArrayList<Integer> indexStoredList = new ArrayList<>(); // This will store the hashed index on which values are stored
 	
 	public HashMap() {
 		this.size=0;
@@ -25,6 +28,8 @@ public class HashMap {
 		
 		return hashArraySize;
 	}
+	
+	
 	
 	public HashMap(int arraySize) {
 		this.size=0;
@@ -62,12 +67,13 @@ public class HashMap {
 		// If node not present already, then add it to the list
 		if(result==null) {
 			bucketArray[hashedIndex].add(new HashtableNode(key,value));
-			size++;
+			indexStoredList.add(hashedIndex);
+			increaseSize();
 			return true;
 		}
 		//if node is present , just update the value		
 		result.setValue(value);
-		size++;
+		increaseSize();
 		return true;
 	
 		
@@ -80,9 +86,19 @@ public class HashMap {
 		String key = nodeTobeAdded.getKey();
 		int value = nodeTobeAdded.getValue();
 		int hashedIndex = this.getHash(key);
-		size++;
-		
-		return true;
+		//Check if the node is already present
+				HashtableNode result = bucketArray[hashedIndex].containsKey(key);
+				// If node not present already, then add it to the list
+				if(result==null) {
+					bucketArray[hashedIndex].add(new HashtableNode(key,value));
+					indexStoredList.add(hashedIndex);
+					increaseSize();
+					return true;
+				}
+				//if node is present , just update the value		
+				result.setValue(value);
+				increaseSize();
+				return true;
 	
 		
 	}
@@ -101,9 +117,95 @@ public class HashMap {
 		return code % this.getHashArraySize();
 	}
 	
+	public int getHash(String key,int size) {
+		
+		int code =  key.hashCode() < 0 ? (key.hashCode()*(-1)) :key.hashCode() ; // making it unsigned
+		
+		return code % size;
+	}
+	
 	public int size() {
 		return this.size;
 	}
+	
+	public boolean remove(String key) {
+		int hashedIndex = this.getHash(key);
+		HashtableNode result = this.bucketArray[hashedIndex].containsKey(key);
+		if(result == null) {
+			return false;
+			
+		}
+		//Otherwise
+		this.bucketArray[hashedIndex].remove(result);
+		indexStoredList.remove(hashedIndex);
+		reduceSize();
+		return true;		
+	}
+	
+	//This method will reduce size and adjust the load by downsizing the array
+	private void reduceSize() {
+		size--;
+		
+	}
+	
+	private void increaseSize() {
+		size++;
+	
+		float currentLoad = calculateLoadFactor();
+		if (currentLoad > this.loadfactor) {
+			
+			// if its greater than resize
+			
+		}
+		
+		
+	}
+	
+	private float calculateLoadFactor() {
+		
+		int difference = this.hashArraySize - this.size;
+		return (difference/this.hashArraySize);
+		
+	}
+	
+	//@param :float , factor by which it should increase or decrease
+	private void resize(float factor) {
+		int newArraySize = (int) (this.hashArraySize * factor);
+		
+		HashtableList[] newArray = new HashtableList[newArraySize];
+		
+		for (int i=0;i<newArraySize;i++) {
+			newArray[i]= new HashtableList();
+			
+		}
+		
+		HashtableList[] oldArray = this.bucketArray;
+		ArrayList<Integer> oldIndexStoredList = this.indexStoredList;
+		ArrayList<Integer> newIndexStoredList= new ArrayList<>(); 
+		for(int i=0;i<oldIndexStoredList.size();i++) {
+			
+			
+			HashtableList tempList= oldArray[oldIndexStoredList.get(i)];
+			
+			for(int n=0;n<tempList.getSize();n++) {
+				
+				HashtableNode tempNode = tempList.getNode(n);
+				int newHashedIndex = this.getHash(tempNode.getKey(),newArraySize);
+				newArray[newHashedIndex].add(tempNode);
+				newIndexStoredList.add(newHashedIndex);
+				
+			}
+			
+			this.bucketArray = newArray;
+			this.indexStoredList = newIndexStoredList;
+			
+		}
+		
+		
+		
+	}
+	
+	
 	
 	
 	
