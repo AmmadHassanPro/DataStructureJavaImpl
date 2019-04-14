@@ -24,13 +24,6 @@ public class HashMap {
 		loadfactor=0.75f;
 	}
 	
-	private int getHashArraySize() {
-		
-		return hashArraySize;
-	}
-	
-	
-	
 	public HashMap(int arraySize) {
 		this.size=0;
 		this.hashArraySize = arraySize;
@@ -57,6 +50,12 @@ public class HashMap {
 		loadfactor=lf;
 		
 	}
+	
+	private int getHashArraySize() {
+		
+		return hashArraySize;
+	}
+	
 	
 	public boolean put(String key, int value) {
 		
