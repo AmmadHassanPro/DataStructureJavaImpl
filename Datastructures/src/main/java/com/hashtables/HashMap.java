@@ -74,8 +74,6 @@ public class HashMap {
 		result.setValue(value);
 		increaseSize();
 		return true;
-	
-		
 	}
 	
 	
@@ -98,8 +96,6 @@ public class HashMap {
 				result.setValue(value);
 				increaseSize();
 				return true;
-	
-		
 	}
 	
 	public HashtableNode get(String key) {
@@ -109,17 +105,13 @@ public class HashMap {
 		
 	}
 	
-	public int getHash(String key) {
-		
+	private int getHash(String key) {
 		int code =  key.hashCode() < 0 ? (key.hashCode()*(-1)) :key.hashCode() ; // making it unsigned
-		
 		return code % this.getHashArraySize();
 	}
 	
-	public int getHash(String key,int size) {
-		
+	private int getHash(String key,int size) {
 		int code =  key.hashCode() < 0 ? (key.hashCode()*(-1)) :key.hashCode() ; // making it unsigned
-		
 		return code % size;
 	}
 	
@@ -150,23 +142,16 @@ public class HashMap {
 	//This method will reduce size and adjust the load by downsizing the array
 	private void reduceSize() {
 		size--;
-		
 		float currentLoad = calculateLoadFactor();
-		
 		if (currentLoad < (this.loadfactor / 2) ) {
-			
 			this.resize(0.5f);
 		}
-		
-		
 	}
 	
 	private void increaseSize() {
 		size++;
-	
 		float currentLoad = calculateLoadFactor();
 		if (currentLoad > this.loadfactor) {
-			
 			// if its greater than resize , double it
 			this.resize(2);
 			
@@ -175,7 +160,6 @@ public class HashMap {
 	}
 	
 	private float calculateLoadFactor() {
-		
 		
 		return ((float)this.size/this.hashArraySize);
 		
@@ -205,9 +189,6 @@ public class HashMap {
 				continue;
 			}
 			
-			
-			
-			
 			HashtableList tempList= oldArray[index];
 			int temListSize = tempList.getSize(); //as size will dynamically change when transferring , so keeping the size before hand
 			for(int n=0;n<temListSize;n++) {
@@ -224,9 +205,7 @@ public class HashMap {
 				
 			}
 			
-			alreadyCheckedIndex.add(index);
-			
-			
+			alreadyCheckedIndex.add(index);		
 			
 		}
 		
@@ -236,18 +215,4 @@ public class HashMap {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
