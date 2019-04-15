@@ -18,7 +18,7 @@ public class LinkedListTest {
 	public void setup() {
 		node1 = new Node("one",1);
 		
-		LinkedList objectUnderTest = new LinkedList(node1);
+		objectUnderTest = new LinkedList(node1);
 		
 		Node node2 = new Node("two",2);
 		Node node3 = new Node("three",3);
