@@ -1,4 +1,4 @@
-package comhashtables.test;
+package com.hashtables;
 
 import com.hashtables.HashtableList;
 import com.hashtables.HashtableNode;
