@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class HashMap {
 	
-	private HashtableList[] bucketArray;
+	private LinkedList[] bucketArray;
 	private int hashArraySize;
 	private int size; // Number of actual elements present
 	private float loadfactor=0.75f;
@@ -14,10 +14,10 @@ public class HashMap {
 		this.size=0;
 		int arraySize =16;
 		this.hashArraySize = arraySize;
-		bucketArray = new HashtableList[arraySize];
+		bucketArray = new LinkedList[arraySize];
 		
 		for (int i=0;i<arraySize;i++) {
-			bucketArray[i]= new HashtableList();
+			bucketArray[i]= new LinkedList();
 			
 		}
 		
@@ -27,10 +27,10 @@ public class HashMap {
 	public HashMap(int arraySize) {
 		this.size=0;
 		this.hashArraySize = arraySize;
-		bucketArray = new HashtableList[arraySize];
+		bucketArray = new LinkedList[arraySize];
 		
 		for (int i=0;i<arraySize;i++) {
-			bucketArray[i]= new HashtableList();
+			bucketArray[i]= new LinkedList();
 			
 		}
 		loadfactor=0.75f;
@@ -41,10 +41,10 @@ public class HashMap {
 	public HashMap(int arraySize ,float lf) {
 		this.size=0;
 		this.hashArraySize = arraySize;
-		bucketArray = new HashtableList[arraySize];
+		bucketArray = new LinkedList[arraySize];
 		
 		for (int i=0;i<arraySize;i++) {
-			bucketArray[i]= new HashtableList();
+			bucketArray[i]= new LinkedList();
 			
 		}
 		loadfactor=lf;
@@ -62,10 +62,10 @@ public class HashMap {
 		//caculating the hash
 		int hashedIndex =  this.getHash(key);
 		//Check if the node is already present
-		HashtableNode result = bucketArray[hashedIndex].containsKey(key);
+		Node result = bucketArray[hashedIndex].containsKey(key);
 		// If node not present already, then add it to the list
 		if(result==null) {
-			bucketArray[hashedIndex].add(new HashtableNode(key,value));
+			bucketArray[hashedIndex].add(new Node(key,value));
 			indexStoredList.add(hashedIndex);
 			increaseSize();
 			return true;
@@ -77,17 +77,17 @@ public class HashMap {
 	}
 	
 	
-	public boolean put(HashtableNode nodeTobeAdded) {
+	public boolean put(Node nodeTobeAdded) {
 		
 		//caculating the hash
 		String key = nodeTobeAdded.getKey();
 		int value = nodeTobeAdded.getValue();
 		int hashedIndex = this.getHash(key);
 		//Check if the node is already present
-				HashtableNode result = bucketArray[hashedIndex].containsKey(key);
+				Node result = bucketArray[hashedIndex].containsKey(key);
 				// If node not present already, then add it to the list
 				if(result==null) {
-					bucketArray[hashedIndex].add(new HashtableNode(key,value));
+					bucketArray[hashedIndex].add(new Node(key,value));
 					indexStoredList.add(hashedIndex);
 					increaseSize();
 					return true;
@@ -98,9 +98,9 @@ public class HashMap {
 				return true;
 	}
 	
-	public HashtableNode get(String key) {
+	public Node get(String key) {
 		int hashedIndex = this.getHash(key);
-		HashtableList bucket = this.bucketArray[hashedIndex];
+		LinkedList bucket = this.bucketArray[hashedIndex];
 		return bucket.getNode(key);
 		
 	}
@@ -121,7 +121,7 @@ public class HashMap {
 	
 	public boolean remove(String key) {
 		int hashedIndex = this.getHash(key);
-		HashtableNode result = this.bucketArray[hashedIndex].containsKey(key);
+		Node result = this.bucketArray[hashedIndex].containsKey(key);
 		if(result == null) {
 			return false;
 			
@@ -169,14 +169,14 @@ public class HashMap {
 	private void resize(float factor) {
 		int newArraySize = (int) (this.hashArraySize * factor);
 		
-		HashtableList[] newArray = new HashtableList[newArraySize];
+		LinkedList[] newArray = new LinkedList[newArraySize];
 		
 		for (int i=0;i<newArraySize;i++) {
-			newArray[i]= new HashtableList();
+			newArray[i]= new LinkedList();
 			
 		}
 		
-		HashtableList[] oldArray = this.bucketArray;
+		LinkedList[] oldArray = this.bucketArray;
 		ArrayList<Integer> oldIndexStoredList = this.indexStoredList;
 		// Since the index list can contain duplicate indexes we need to keep track of what indexes we have already checked
 		ArrayList<Integer> alreadyCheckedIndex = new ArrayList<>();
@@ -189,11 +189,11 @@ public class HashMap {
 				continue;
 			}
 			
-			HashtableList tempList= oldArray[index];
+			LinkedList tempList= oldArray[index];
 			int temListSize = tempList.getSize(); //as size will dynamically change when transferring , so keeping the size before hand
 			for(int n=0;n<temListSize;n++) {
 				
-				HashtableNode tempNode = tempList.getNode(0);
+				Node tempNode = tempList.getNode(0);
 				// Removing the node from the current Linked List , so that it cannot be reference from the old list
 				tempList.remove(tempNode);
 				//Setting it null, so that it accidently does not refer anything from the old Linked List

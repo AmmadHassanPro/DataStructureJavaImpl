@@ -2,30 +2,30 @@ package com.hashtables;
 // This class is the individual list that buckets will refer to , store objects in this list when a collision occurs
 // This code can also be used for implementation of Linked List
 
-public class HashtableList {
+public class LinkedList {
 	
-	private HashtableNode headPointer;
+	private Node headPointer;
 
-	public HashtableNode getHeadPointer() {
+	public Node getHeadPointer() {
 		return headPointer;
 	}
 
-	public void setHeadPointer(HashtableNode headPointer) {
+	public void setHeadPointer(Node headPointer) {
 		this.headPointer = headPointer;
 	}
 	
 	// Must pass an element in this list to initialize
-	public HashtableList(HashtableNode head){
+	public LinkedList(Node head){
 		
 		headPointer = head;
 	}
 	
-	public HashtableList(){
+	public LinkedList(){
 			
 			
 		}
 	
-	public boolean add(HashtableNode node) {
+	public boolean add(Node node) {
 
 		if(node==null)
 			return false;
@@ -34,7 +34,7 @@ public class HashtableList {
 			return true;
 		}
 		
-		HashtableNode currentRef=headPointer ;
+		Node currentRef=headPointer ;
 		// Traversing to the last element		
 		while(currentRef.getNext()!=null) {
 		
@@ -53,7 +53,7 @@ public class HashtableList {
 	
 	public int getSize() {
 		int count = 1;
-		HashtableNode currentRef=headPointer ;
+		Node currentRef=headPointer ;
 		
 		if(currentRef==null)
 			return 0;
@@ -66,10 +66,10 @@ public class HashtableList {
 		
 	}	
 	
-	public HashtableNode getNode(int index) {
+	public Node getNode(int index) {
 		
 		int count = 0;
-		HashtableNode currentRef=headPointer ;
+		Node currentRef=headPointer ;
 		
 		if(index==0) {
 			return currentRef;
@@ -91,10 +91,10 @@ public class HashtableList {
 	}
 	
 	
-	public HashtableNode getNode(String key) {
+	public Node getNode(String key) {
 		
 		
-	HashtableNode currentRef=headPointer ;
+	Node currentRef=headPointer ;
 		if(currentRef==null) {
 			return null;
 		}
@@ -118,7 +118,7 @@ public class HashtableList {
 	
 	public boolean remove(int index) {
 		
-		HashtableNode currentRef=headPointer ;
+		Node currentRef=headPointer ;
 		if(currentRef==null) {
 			return false;
 		}
@@ -142,15 +142,15 @@ public class HashtableList {
 			}
 		}
 		
-		HashtableNode nodetoDelete = currentRef.getNext();
+		Node nodetoDelete = currentRef.getNext();
 		currentRef.setNext(nodetoDelete.getNext());
 		return true;
 		
 	}
 	
-	public boolean remove(HashtableNode nodeToRemove) {
+	public boolean remove(Node nodeToRemove) {
 
-		HashtableNode currentRef = headPointer;
+		Node currentRef = headPointer;
 		if(currentRef==null) {
 			return false;
 		}
@@ -174,7 +174,7 @@ public class HashtableList {
 		}
 		
 		
-		HashtableNode nextRefFromRemovedNode = currentRef.getNext().getNext();
+		Node nextRefFromRemovedNode = currentRef.getNext().getNext();
 		//Setting Current Ref to skip the removed node
 		currentRef.setNext(nextRefFromRemovedNode);
 		nodeFound = true;
@@ -189,13 +189,13 @@ public class HashtableList {
 		return nodeFound;
 	}
 	
-	public boolean replace(HashtableNode currentNode , HashtableNode newNode) {
+	public boolean replace(Node currentNode , Node newNode) {
 		
-		HashtableNode currentRef = headPointer ;
+		Node currentRef = headPointer ;
 		if(currentRef==null) {
 			return false;
 		}
-		HashtableNode nextRefFromReplaceNode = null;
+		Node nextRefFromReplaceNode = null;
 		
 		if(currentNode.getKey().equals(currentRef.getKey())) {
 			newNode.setNext(headPointer.getNext());
@@ -232,7 +232,7 @@ public class HashtableList {
 		
 	}
 	
-public boolean replace(int index , HashtableNode newNode) {
+public boolean replace(int index , Node newNode) {
 		
 		if(index>=this.getSize()) {
 			return false;
@@ -243,8 +243,8 @@ public boolean replace(int index , HashtableNode newNode) {
 			return true;
 		}		
 		
-		HashtableNode currentRef = headPointer ;
-		HashtableNode nextRefFromReplaceNode = null;
+		Node currentRef = headPointer ;
+		Node nextRefFromReplaceNode = null;
 		int count=0;
 		
 		try {
@@ -280,7 +280,7 @@ public boolean replace(int index , HashtableNode newNode) {
 
 
 	// If it contains the key, it will return the object
-	public HashtableNode containsKey(String key) {
+	public Node containsKey(String key) {
 		
 		return this.getNode(key);
 		

@@ -44,7 +44,7 @@ public class HashMapTests {
 	@Test
 	public void  put() {
 		objectUnderTest.put("example" ,1);
-		assertEquals(1,objectUnderTest.get("example"));
+		assertEquals(1,objectUnderTest.get("example").getValue());
 		
 	}
 	
