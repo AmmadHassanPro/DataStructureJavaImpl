@@ -1,6 +1,8 @@
-package com.hashtables;
+package com.lists;
 // This class is the individual list that buckets will refer to , store objects in this list when a collision occurs
 // This code can also be used for implementation of Linked List
+
+import com.nodes.Node;
 
 public class LinkedList {
 	

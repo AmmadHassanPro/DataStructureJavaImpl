@@ -2,6 +2,9 @@ package com.hashtables;
 
 import java.util.ArrayList;
 
+import com.lists.LinkedList;
+import com.nodes.Node;
+
 public class HashMap {
 	
 	private LinkedList[] bucketArray;

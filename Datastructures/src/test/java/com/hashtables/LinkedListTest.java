@@ -7,8 +7,8 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hashtables.LinkedList;
-import com.hashtables.Node;
+import com.lists.LinkedList;
+import com.nodes.Node;
 
 public class LinkedListTest {
 	private LinkedList objectUnderTest;
