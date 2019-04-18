@@ -12,7 +12,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) // Will be placing alphabets in front of method name to make sure they run in specific order
 public class HashMapTests {
 	private HashMap objectUnderTest;
 	private Class testClass;
@@ -49,7 +48,7 @@ public class HashMapTests {
 	 *This test will determine if the hashmap is resizing (increasing/decreasing) the Bucket Array as per its load factor 
 	 */
 	@Test
-	public void atestIncreaseDecreaseSize()  {		
+	public void testIncreaseDecreaseSize()  {		
 		
 		// Testing increase in size
 		int SIZE_BEFORE_RESIZE=0,SIZE_AFTER_RESIZE=0;
@@ -90,12 +89,12 @@ public class HashMapTests {
 		
 	}	
 	@Test
-	public void cget() {
+	public void get() {
 		assertNotNull(objectUnderTest.get("one"));
 		assertEquals("one",objectUnderTest.get("one").getKey());
 	}
 	@Test
-	public void dremove() {
+	public void remove() {
 		boolean removedObject= objectUnderTest.remove("seven");
 		assertTrue(removedObject);
 		assertNull(objectUnderTest.get("seven"));
@@ -103,7 +102,7 @@ public class HashMapTests {
 	}
 	
 	@Test
-	public void  eput() {
+	public void  put() {
 		objectUnderTest.put("example" ,1);
 		assertEquals(1,objectUnderTest.get("example").getValue());
 		
