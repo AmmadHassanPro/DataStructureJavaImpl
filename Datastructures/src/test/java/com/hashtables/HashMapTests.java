@@ -26,11 +26,11 @@ public class HashMapTests {
 		
 	
 		testClass =  objectUnderTest.getClass();
+		
 		try {
 			hashArraySizeField = testClass.getDeclaredField("hashArraySize");
 			hashArraySizeField.setAccessible(true);
 		} catch (NoSuchFieldException | SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
@@ -42,20 +42,16 @@ public class HashMapTests {
 		objectUnderTest.put("six",6);
 		objectUnderTest.put("seven",7);
 		
-		
-		
 	}
 
 
 	/*
-	 *This test will determine if the hashmap is resizing (increasing) as per its load factor 
+	 *This test will determine if the hashmap is resizing (increasing/decreasing) the Bucket Array as per its load factor 
 	 */
 	@Test
-	public void atestIncreaseSize()  {
-		//Size Will grow size=8,(can be confirmed from debugger)
+	public void atestIncreaseDecreaseSize()  {		
 		
-		
-	
+		// Testing increase in size
 		int SIZE_BEFORE_RESIZE=0,SIZE_AFTER_RESIZE=0;
 		try {
 			
@@ -66,56 +62,33 @@ public class HashMapTests {
 			objectUnderTest.put("ten",10);
 			objectUnderTest.put("eleven",11);
 			objectUnderTest.put("twelve",12);
+			
 			// It will resize from here
 			objectUnderTest.put("thirteen",13);
-			
-			
 			SIZE_AFTER_RESIZE = hashArraySizeField.getInt(objectUnderTest);
-		} catch ( SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-		
-		assertTrue(SIZE_AFTER_RESIZE>SIZE_BEFORE_RESIZE);
-		
-	}
-	/*
-	 *This test will determine if the hashmap is resizing (decreasing) as per its load factor 
-	 */
-	@Test
-	public void btestDecrease() {
-		int SIZE_BEFORE_RESIZE=0, SIZE_AFTER_RESIZE=0;
-		try {
+			
+			assertTrue(SIZE_AFTER_RESIZE>SIZE_BEFORE_RESIZE);
+			
+			
+			//Testing Decrease in size
 			
 			SIZE_BEFORE_RESIZE =  hashArraySizeField.getInt(objectUnderTest);
-		
-			// It will resize from here
 			objectUnderTest.remove("thirteen");
-			
+			objectUnderTest.remove("twelve");
 			
 			SIZE_AFTER_RESIZE = hashArraySizeField.getInt(objectUnderTest);
+			
+			assertTrue(SIZE_AFTER_RESIZE<SIZE_BEFORE_RESIZE);
+			
 		} catch ( SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertTrue(SIZE_AFTER_RESIZE<SIZE_BEFORE_RESIZE);
 		
-	
-	}
-	
+	}	
 	@Test
 	public void cget() {
 		assertNotNull(objectUnderTest.get("one"));
@@ -123,9 +96,9 @@ public class HashMapTests {
 	}
 	@Test
 	public void dremove() {
-		boolean removedObject= objectUnderTest.remove("eight");
+		boolean removedObject= objectUnderTest.remove("seven");
 		assertTrue(removedObject);
-		assertNull(objectUnderTest.get("eight"));
+		assertNull(objectUnderTest.get("seven"));
 		
 	}
 	
