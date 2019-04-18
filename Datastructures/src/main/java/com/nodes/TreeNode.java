@@ -27,11 +27,11 @@ public class TreeNode{
 		this.leftchild = leftchild;
 	}
 
-	public TreeNode getRighchild() {
+	public TreeNode getRightchild() {
 		return rightchild;
 	}
 
-	public void setRighchild(TreeNode righchild) {
+	public void setRightchild(TreeNode righchild) {
 		childcount++;
 		this.rightchild = righchild;
 	}
