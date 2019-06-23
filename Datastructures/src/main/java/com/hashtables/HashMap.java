@@ -60,29 +60,29 @@ public class HashMap {
 	}
 	
 	
-	public boolean put(String key, int value) {
+	public int put(String key, int value) {
 		
-		//caculating the hash
+		//Calculating the hash
 		int hashedIndex =  this.getHash(key);
 		//Check if the node is already present
 		Node result = bucketArray[hashedIndex].containsKey(key);
 		// If node not present already, then add it to the list
 		if(result==null) {
-			bucketArray[hashedIndex].add(new Node(key,value));
+			Node newNode = new Node(key,value);
+			bucketArray[hashedIndex].add(newNode);
 			indexStoredList.add(hashedIndex);
 			increaseSize();
-			return true;
+			return newNode.getValue();
+			
 		}
-		//if node is present , just update the value		
-		result.setValue(value);
-		increaseSize();
-		return true;
+		//if node is present ,then return the value		
+		return result.getValue();
 	}
 	
 	
-	public boolean put(Node nodeTobeAdded) {
+	public Node put(Node nodeTobeAdded) {
 		
-		//caculating the hash
+		//Calculating the hash
 		String key = nodeTobeAdded.getKey();
 		int value = nodeTobeAdded.getValue();
 		int hashedIndex = this.getHash(key);
@@ -90,15 +90,15 @@ public class HashMap {
 				Node result = bucketArray[hashedIndex].containsKey(key);
 				// If node not present already, then add it to the list
 				if(result==null) {
-					bucketArray[hashedIndex].add(new Node(key,value));
+					bucketArray[hashedIndex].add(nodeTobeAdded);
 					indexStoredList.add(hashedIndex);
 					increaseSize();
-					return true;
+					return null;
+					
 				}
-				//if node is present , just update the value		
-				result.setValue(value);
-				increaseSize();
-				return true;
+				//if node is present , then return the value
+				return result;
+				
 	}
 	
 	public Node get(String key) {
@@ -140,6 +140,21 @@ public class HashMap {
 		
 		reduceSize();
 		return true;		
+	}
+	
+	public Node remove(Node removeNode) {
+		int hashedIndex = this.getHash(removeNode.getKey());
+		Node result = this.bucketArray[hashedIndex].containsKey(removeNode.getKey());
+		// If the node is not found at the index, return null
+		if(result == null) {
+			return null;
+		}
+		//If the node is found then remove it from the list
+		this.bucketArray[hashedIndex].remove(result);
+		reduceSize();
+		return result;
+		
+		
 	}
 	
 	//This method will reduce size and adjust the load by downsizing the array
@@ -217,5 +232,6 @@ public class HashMap {
 		this.hashArraySize = this.bucketArray.length;
 		
 	}
+
 	
 }
