@@ -25,12 +25,9 @@ public class Node {
 		this.value = value;
 	}
 	public Node(String k, int v){
-		
 		this.next=null;
 		key = k;
 		value =v;
-
-		
 		
 	}
 	
